@@ -1,0 +1,51 @@
+{
+  "name": "neocoin-exchange-beta",
+  "version": "0.1.0-beta",
+  "description": "NeoCoin Exchange desktop market simulator beta",
+  "author": "NeoCoin Exchange",
+  "private": true,
+  "main": "electron-main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "desktop": "npm run build && electron .",
+    "package:win": "npm run build && electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
+    "typescript": "^6.0.3"
+  },
+  "build": {
+    "appId": "com.neocoin.exchange.beta",
+    "productName": "NeoCoin Exchange Beta",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "index.html",
+      "style.css",
+      "dist/**/*",
+      "electron-main.js",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "NeoCoin-Exchange-Beta-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NeoCoin Exchange Beta"
+    }
+  }
+}
